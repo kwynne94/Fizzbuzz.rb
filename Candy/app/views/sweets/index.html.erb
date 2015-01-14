@@ -1,0 +1,39 @@
+<h1>Listing sweets</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Photo</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sweets.each do |sweet| %>
+      <% if sweet.user_id == current_user.id %>
+        <tr>
+          <td><%= sweet.name %></td>
+          <td>
+            <%= link_to sweet.photo.url(:large) do %>
+              <%= image_tag sweet.photo.url(:thumb) %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= sweet.category.name %>
+          </td>
+
+          <td><%= link_to 'Show', sweet %></td>
+          <td><%= link_to 'Edit', edit_sweet_path(sweet) %></td>
+          <td><%= link_to 'Destroy', sweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sweet', new_sweet_path %>

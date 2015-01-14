@@ -1,0 +1,30 @@
+<h1>Listing snippets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Quote</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @snippets.each do |snippet| %>
+      <tr>
+        <td><%= snippet.author %></td>
+        <td><%= snippet.quote %></td>
+        <% snippet.tags.each do |tag| %>
+          <td><%= link_to snippet.author, snippet_tag_path(tag_name: tag.name) %></td>
+        <% end %>
+        <td><%= link_to 'Show', snippet %></td>
+        <td><%= link_to 'Edit', edit_snippet_path(snippet) %></td>
+        <td><%= link_to 'Destroy', snippet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Snippet', new_snippet_path %>
